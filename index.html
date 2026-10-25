@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portal de Empleo - Solicitud de Candidatura</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
+</head>
+<body class="bg-slate-100 text-slate-800 min-h-screen py-8 px-4 sm:px-6 lg:px-8 flex flex-col justify-between">
+    <div class="max-w-4xl mx-auto w-full space-y-8">
+        <header class="text-center space-y-2">
+            <h1 class="text-3xl font-bold text-slate-900 sm:text-4xl">Portal de Solicitud de Empleo</h1>
+            <p class="text-slate-600 text-sm sm:text-base">Completa tus datos para iniciar tu proceso de selección e incorporación profesional.</p>
+        </header>
+        <main class="bg-white rounded-2xl shadow-xl border border-slate-200/80 overflow-hidden">
+            <form id="jobForm" class="p-6 sm:p-10 space-y-6" onsubmit="procesarSolicitud(event)">
+                <div>
+                    <h2 class="text-lg font-semibold text-slate-900 border-b border-slate-200 pb-2 mb-4 flex items-center gap-2">
+                        <svg class="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                        </svg>
+                        Datos Personales
+                    </h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="space-y-1">
+                            <label for="nombre" class="block text-sm font-medium text-slate-700">Nombre Completo <span class="text-red-500">*</span></label>
+                            <input type="text" id="nombre" name="nombre" placeholder="Ej. Ana María Gómez"
+                                class="w-full px-4 py-2.5 rounded-lg border border-slate-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition outline-none text-slate-800 placeholder-slate-400">
+                        </div>
+                        <div class="space-y-1">
+                            <label for="edad" class="block text-sm font-medium text-slate-700">Edad <span class="text-red-500">*</span></label>
+                            <input type="number" id="edad" name="edad" min="1" max="100" placeholder="Ej. 25"
+                                class="w-full px-4 py-2.5 rounded-lg border border-slate-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition outline-none text-slate-800 placeholder-slate-400">
+                        </div>
+                        <div class="space-y-1">
+                            <label for="rfc" class="block text-sm font-medium text-slate-700">RFC <span class="text-red-500">*</span></label>
+                            <input type="text" id="rfc" name="rfc" uppercase placeholder="Ej. GOMA950101XXX" maxlength="13"
+                                class="w-full px-4 py-2.5 rounded-lg border border-slate-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition outline-none text-slate-800 placeholder-slate-400 uppercase">
+                        </div>
+                        <div class="space-y-1">
+                            <label class="block text-sm font-medium text-slate-700 mb-2">Sexo <span class="text-red-500">*</span></label>
+                            <div class="flex items-center gap-6 pt-1">
+                                <label class="flex items-center gap-2 cursor-pointer text-sm text-slate-700">
+                                    <input type="radio" name="sexo" value="Masculino" class="w-4 h-4 text-blue-600 focus:ring-blue-500 border-slate-300">
+                                    Masculino
+                                </label>
+                                <label class="flex items-center gap-2 cursor-pointer text-sm text-slate-700">
+                                    <input type="radio" name="sexo" value="Femenino" class="w-4 h-4 text-blue-600 focus:ring-blue-500 border-slate-300">
+                                    Femenino
+                                </label>
+                                <label class="flex items-center gap-2 cursor-pointer text-sm text-slate-700">
+                                    <input type="radio" name="sexo" value="Otro" class="w-4 h-4 text-blue-600 focus:ring-blue-500 border-slate-300">
+                                    Otro
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <h2 class="text-lg font-semibold text-slate-900 border-b border-slate-200 pb-2 mb-4 flex items-center gap-2">
+                        <svg class="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
+                        </svg>
+                        Perfil Técnico y Ubicación
+                    </h2>
+                    <div class="space-y-2 mb-6">
+                        <label class="block text-sm font-medium text-slate-700">Habilidades Tecnológicas <span class="text-red-500">*</span></label>
+                        <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
+                            <label class="flex items-center gap-2 p-2.5 rounded-lg border border-slate-200 hover:bg-slate-50 cursor-pointer transition">
+                                <input type="checkbox" name="habilidades" value="HTML/CSS" class="w-4 h-4 text-blue-600 rounded focus:ring-blue-500 border-slate-300">
+                                <span class="text-sm font-medium text-slate-700">HTML / CSS</span>
+                            </label>
+                            <label class="flex items-center gap-2 p-2.5 rounded-lg border border-slate-200 hover:bg-slate-50 cursor-pointer transition">
+                                <input type="checkbox" name="habilidades" value="JavaScript" class="w-4 h-4 text-blue-600 rounded focus:ring-blue-500 border-slate-300">
+                                <span class="text-sm font-medium text-slate-700">JavaScript</span>
+                            </label>
+                            <label class="flex items-center gap-2 p-2.5 rounded-lg border border-slate-200 hover:bg-slate-50 cursor-pointer transition">
+                                <input type="checkbox" name="habilidades" value="Python" class="w-4 h-4 text-blue-600 rounded focus:ring-blue-500 border-slate-300">
+                                <span class="text-sm font-medium text-slate-700">Python</span>
+                            </label>
+                            <label class="flex items-center gap-2 p-2.5 rounded-lg border border-slate-200 hover:bg-slate-50 cursor-pointer transition">
+                                <input type="checkbox" name="habilidades" value="SQL" class="w-4 h-4 text-blue-600 rounded focus:ring-blue-500 border-slate-300">
+                                <span class="text-sm font-medium text-slate-700">Base de Datos SQL</span>
+                            </label>
+                            <label class="flex items-center gap-2 p-2.5 rounded-lg border border-slate-200 hover:bg-slate-50 cursor-pointer transition">
+                                <input type="checkbox" name="habilidades" value="Git/GitHub" class="w-4 h-4 text-blue-600 rounded focus:ring-blue-500 border-slate-300">
+                                <span class="text-sm font-medium text-slate-700">Git & GitHub</span>
+                            </label>
+                            <label class="flex items-center gap-2 p-2.5 rounded-lg border border-slate-200 hover:bg-slate-50 cursor-pointer transition">
+                                <input type="checkbox" name="habilidades" value="Docker" class="w-4 h-4 text-blue-600 rounded focus:ring-blue-500 border-slate-300">
+                                <span class="text-sm font-medium text-slate-700">Docker</span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="space-y-1">
+                        <label for="sucursal" class="block text-sm font-medium text-slate-700">Sucursal más cercana <span class="text-red-500">*</span></label>
+                        <select id="sucursal" name="sucursal"
+                            class="w-full px-4 py-2.5 rounded-lg border border-slate-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition outline-none text-slate-800 bg-white">
+                            <option value="">-- Selecciona una sucursal --</option>
+                            <option value="centro">Sucursal Centro (Oficinas Corporativas)</option>
+                            <option value="norte">Sucursal Norte (Complejo Industrial)</option>
+                            <option value="sur">Sucursal Sur (Distrito Financiero)</option>
+                            <option value="este">Sucursal Este (Centro de Innovación)</option>
+                        </select>
+                    </div>
+                </div>
+                <div id="alertaError" class="hidden bg-red-50 border-l-4 border-red-500 p-4 rounded-r-lg">
+                    <div class="flex items-center">
+                        <svg class="w-5 h-5 text-red-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                        </svg>
+                        <p id="mensajeErrorText" class="text-sm text-red-700 font-medium"></p>
+                    </div>
+                </div>
+                <div class="pt-4 flex flex-col sm:flex-row gap-3">
+                    <button type="submit"
+                        class="flex-1 bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg transition duration-200 shadow-lg shadow-blue-500/30 flex items-center justify-center gap-2">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                        Enviar Solicitud
+                    </button>
+                    <button type="button" onclick="limpiarFormulario()"
+                        class="bg-slate-200 hover:bg-slate-300 text-slate-700 font-medium py-3 px-6 rounded-lg transition duration-200">
+                        Limpiar Campos
+                    </button>
+                </div>
+            </form>
+        </main>
+        <section id="tarjetaResultado" class="hidden bg-white rounded-2xl shadow-xl border border-emerald-200 overflow-hidden transition-all duration-300">
+            <div class="bg-emerald-600 p-6 text-white flex justify-between items-center">
+                <div class="flex items-center gap-3">
+                    <div class="bg-white/20 p-2 rounded-full">
+                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                        </svg>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-bold">¡Solicitud Registrada Exitosamente!</h3>
+                        <p class="text-emerald-100 text-sm">Tu información ha sido capturada en nuestro sistema de talento.</p>
+                    </div>
+                </div>
+                <span class="text-xs bg-emerald-700 px-3 py-1 rounded-full font-mono">ESTADO: RECIBIDO</span>
+            </div>
+            <div class="p-6 sm:p-8 space-y-6">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 bg-slate-50 p-6 rounded-xl border border-slate-200">
+                    <div>
+                        <p class="text-xs font-semibold uppercase tracking-wider text-slate-400">Postulante</p>
+                        <p id="resNombre" class="text-lg font-bold text-slate-800">-</p>
+                    </div>
+                    <div>
+                        <p class="text-xs font-semibold uppercase tracking-wider text-slate-400">Edad Registrada</p>
+                        <p id="resEdad" class="text-base font-semibold text-slate-800">-</p>
+                    </div>
+                    <div>
+                        <p class="text-xs font-semibold uppercase tracking-wider text-slate-400">RFC Cadena</p>
+                        <p id="resRfc" class="text-base font-mono font-semibold text-blue-600">-</p>
+                    </div>
+                    <div>
+                        <p class="text-xs font-semibold uppercase tracking-wider text-slate-400">Sexo</p>
+                        <p id="resSexo" class="text-base font-semibold text-slate-800">-</p>
+                    </div>
+                </div>
+                <div class="border border-blue-100 bg-blue-50/50 p-4 rounded-xl">
+                    <h4 class="text-sm font-semibold text-blue-900 uppercase tracking-wider mb-1">Detalles de Sucursal Asignada</h4>
+                    <p id="resSucursal" class="text-base font-medium text-slate-800"></p>
+                    <p id="resSucursalDetalle" class="text-sm text-slate-600 mt-1 italic"></p>
+                </div>
+                <div>
+                    <h4 class="text-sm font-semibold text-slate-700 uppercase tracking-wider mb-2">Habilidades Registradas</h4>
+                    <div id="resHabilidades" class="flex flex-wrap gap-2">
+                    </div>
+                </div>
+                <div class="pt-4 text-right">
+                    <button onclick="limpiarFormulario()" class="inline-flex items-center gap-2 text-sm text-blue-600 font-semibold hover:text-blue-800 transition">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                        </svg>
+                        Registrar otra solicitud
+                    </button>
+                </div>
+            </div>
+        </section>
+    </div>
+    <footer class="text-center text-xs text-slate-500 mt-8">
+        Portal de Selección e Incorporación &copy; 2026 - Todos los derechos reservados.
+    </footer>
+    <script>
+        function procesarSolicitud(e) {
+            e.preventDefault();
+            ocultarError();
+            const nombre = document.getElementById('nombre').value.trim();
+            const edadVal = document.getElementById('edad').value.trim();
+            const edad = parseInt(edadVal);
+            const rfc = document.getElementById('rfc').value.trim().toUpperCase();
+            const sexoNode = document.querySelector('input[name="sexo"]:checked');
+            const sexo = sexoNode ? sexoNode.value : '';
+            const sucursal = document.getElementById('sucursal').value;
+            const checkboxesHabilidades = document.querySelectorAll('input[name="habilidades"]:checked');
+            if (nombre === '' || isNaN(edad) || rfc === '' || sexo === '' || sucursal === '') {
+                mostrarError("Por favor completa todos los campos obligatorios (*).");
+                return;
+            } else if (edad < 18) {
+                mostrarError("Acceso Denegado: Debes ser mayor de 18 años para postular a esta vacante.");
+                return;
+            } else if (checkboxesHabilidades.length === 0) {
+                mostrarError("Por favor selecciona al menos una habilidad tecnológica.");
+                return;
+            } else {
+                console.log("Validación exitosa: Todos los datos son correctos.");
+            }
+            let nombreSucursal = "";
+            let detallesSucursal = "";
+            switch (sucursal) {
+                case "centro":
+                    nombreSucursal = "Sucursal Centro (Oficinas Corporativas)";
+                    detallesSucursal = "Ubicación: Av. Principal #100 | Contacto: Lic. Roberto Gómez | Evaluación Presencial: Sala A";
+                    break;
+                case "norte":
+                    nombreSucursal = "Sucursal Norte (Complejo Industrial)";
+                    detallesSucursal = "Ubicación: Av. de las Industrias #450 | Contacto: Ing. Sofía Morales | Evaluación Técnica en Laboratorio";
+                    break;
+                case "sur":
+                    nombreSucursal = "Sucursal Sur (Distrito Financiero)";
+                    detallesSucursal = "Ubicación: Blvd. Empresarial #780 | Contacto: Lic. Carlos Fuentes | Entrevistas Piso 3";
+                    break;
+                case "este":
+                    nombreSucursal = "Sucursal Este (Centro de Innovación)";
+                    detallesSucursal = "Ubicación: Calle Tecnológica #22 | Contacto: Dra. Laura Silva | Evaluación Modalidad Híbrida";
+                    break;
+                default:
+                    nombreSucursal = "Sucursal No Asignada";
+                    detallesSucursal = "Sin detalles disponibles.";
+                    break;
+            }
+            let habilidadesSeleccionadas = [];
+            
+            for (let i = 0; i < checkboxesHabilidades.length; i++) {
+                habilidadesSeleccionadas.push(checkboxesHabilidades[i].value);
+            }
+            document.getElementById('resNombre').textContent = nombre;
+            document.getElementById('resEdad').textContent = edad + " años";
+            document.getElementById('resRfc').textContent = rfc;
+            document.getElementById('resSexo').textContent = sexo;
+            
+            document.getElementById('resSucursal').textContent = nombreSucursal;
+            document.getElementById('resSucursalDetalle').textContent = detallesSucursal;
+
+            const contenedorHabilidades = document.getElementById('resHabilidades');
+            contenedorHabilidades.innerHTML = '';
+
+            for (let j = 0; j < habilidadesSeleccionadas.length; j++) {
+                const badge = document.createElement('span');
+                badge.className = 'bg-blue-100 text-blue-800 text-xs font-semibold px-3 py-1.5 rounded-full border border-blue-200';
+                badge.textContent = habilidadesSeleccionadas[j];
+                contenedorHabilidades.appendChild(badge);
+            }
+            const tarjetaResumen = document.getElementById('tarjetaResultado');
+            tarjetaResumen.classList.remove('hidden');
+            tarjetaResumen.scrollIntoView({ behavior: 'smooth' });
+        }
+        function mostrarError(mensaje) {
+            const boxError = document.getElementById('alertaError');
+            const txtError = document.getElementById('mensajeErrorText');
+            txtError.textContent = mensaje;
+            boxError.classList.remove('hidden');
+            boxError.scrollIntoView({ behavior: 'smooth' });
+        }
+        function ocultarError() {
+            const boxError = document.getElementById('alertaError');
+            boxError.classList.add('hidden');
+        }
+        function limpiarFormulario() {
+            document.getElementById('jobForm').reset();
+            ocultarError();
+            document.getElementById('tarjetaResultado').classList.add('hidden');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>
